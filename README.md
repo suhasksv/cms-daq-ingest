@@ -41,7 +41,7 @@ Where $W$ is the number of active worker threads. This guarantees that all fragm
 
 We replaced the standard library's unbounded channels (std::mpsc) with bounded, lock-free ring buffers (crossbeam-channel) pre-allocated with a capacity of 100,000 packets per worker. This ensures that memory is requested from the OS once during booting and never allocated or deallocated during hot ingestion.
 
-📊 Benchmarks & Hardware Performance
+## Benchmarks & Hardware Performance
 
 The ingestion pipeline was profiled under unthrottled loopback stress tests to isolate software execution efficiency from physical transceiver limits.
 
@@ -59,7 +59,7 @@ $$\text{Payload} = \text{Timestamp (8B)} + \text{Event ID (4B)} + \text{Detector
 
 At a sustained throughput of 202,819 events per second, this equals 1,216,914 parameters processed per second. This performance successfully beats the real-time telemetry footprint of a Formula 1 racing car (~1.1 million parameters/sec) on a single consumer-grade laptop.
 
-📈 Lock-Free Metric Collection & Observability
+## Lock-Free Metric Collection & Observability
 
 Observability is handled outside the critical path to prevent print statements from blocking the pipeline.
 
@@ -100,5 +100,5 @@ cargo run --release --package daq_cms_exp --bin daq_cms_exp
 
 Watch the live dashboard update in real-time. Once complete, you will find fully-decoded, high-speed telemetry records saved inside worker_X_sink.csv.
 
-📝 License
+## License
 This project is dual-licensed under the MIT License and the Apache License (Version 2.0). See the MIT LICENSE and LICENSE-APACHE files for details.
